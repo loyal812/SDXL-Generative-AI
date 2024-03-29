@@ -10,7 +10,7 @@ USER user
 WORKDIR /home/user
 
 # Install Poetry.
-RUN --mount=type=cache,target=/root/.cache pip install --user poetry==1.4.2
+RUN --mount=type=cache,target=/home/user/.cache pip install --user poetry==1.4.2
 ENV \
     PATH="/home/user/.local/bin:/home/user/.venv/bin:${PATH}" \
     PYTHONUNBUFFERED=1 \
@@ -25,8 +25,8 @@ FROM base as dev
 
 COPY --chown=user:user ./$PROJECT /home/user/$PROJECT
 
-# CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "5000", "--reload"]
-EXPOSE 5000
+CMD ["uvicorn", "api.main:app", "--host", "0.0.0.0", "--port", "5000", "--reload"]
+# EXPOSE 5000
 
 FROM base as test
 
