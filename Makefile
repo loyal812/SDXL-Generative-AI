@@ -9,10 +9,10 @@ export PROJECT=api
 targets: help
 
 build: ## Build the application
-	docker build . -t gluck0101/oridosai-txt2img
+	docker-compose build api
 
 push: ## Push the application to docker hub
-	docker push gluck0101/oridosai-txt2img
+	docker push gluck0101/oridosai-txt2img:latest
 
 up: ## Run the application
 	docker-compose up --build api

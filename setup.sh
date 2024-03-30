@@ -1,0 +1,1 @@
+pip install httpx pytest black isort mypy fastapi uvicorn diffusers transformers accelerate safetensors omegaconf invisible-watermark>=0.2.0 --root-user-action=ignore
