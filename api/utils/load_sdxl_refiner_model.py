@@ -10,7 +10,11 @@ def load_sdxl_refiner_model():
     model_path = "stabilityai/stable-diffusion-xl-refiner-1.0"
     
     pipeline = StableDiffusionXLImg2ImgPipeline.from_pretrained(
-        model_path, torch_dtype=torch.float16, variant="fp16", use_safetensors=True
+        model_path, 
+        torch_dtype=torch.float16, 
+        variant="fp16", 
+        use_safetensors=True,
+        add_watermarker=False
     ).to("cuda")
     
     return pipeline     # Return the loaded and configured SDXL refiner model
