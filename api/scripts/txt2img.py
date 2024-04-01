@@ -21,13 +21,13 @@ def txt2img(param: Txt2ImgRequest):
         'beta_start': 0.00085,
         'beta_end': 0.012,
         'beta_schedule': 'scaled_linear',
-        "use_karras_sigmas": True
+        "use_karras_sigmas": True,
+        "use_lu_lambdas": True
     }
 
     dpmpp_2m_k = DPMSolverMultistepScheduler(**common_config)
     model.scheduler = dpmpp_2m_k
-    generator = torch.Generator(device='cuda').manual_seed(-1)
-    generator.manual_seed(-1)
+    generator = torch.Generator(device='cuda').manual_seed(12345)
 
     params = {
         'prompt': [param.prompt],
@@ -52,9 +52,9 @@ def txt2img(param: Txt2ImgRequest):
         'negative_target_size' : param.negative_target_size
     }
 
-    sdxl_img = model(**params, generator=generator).images[0]
+    sdxl_img = model(**params, generator=generator)
 
-    return sdxl_img                     # Return the generated image.
+    return sdxl_img[0][0]                     # Return the generated image.
 
 
 # Function for refiner images using sdxl refiner model.
