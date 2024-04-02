@@ -1,5 +1,6 @@
 import os
 import sys
+import io
 
 # Get the current script's directory
 current_script_directory = os.path.dirname(os.path.abspath(__file__))
@@ -11,6 +12,7 @@ project_root = os.path.abspath(os.path.join(current_script_directory, os.pardir)
 sys.path.append(project_root)
 sys.path.append(current_script_directory)
 
+from PIL import Image
 from fastapi import Depends, FastAPI, Response, File, UploadFile
 from scripts.txt2img import txt2img, refinerImg
 from scripts.img2img import img2img
