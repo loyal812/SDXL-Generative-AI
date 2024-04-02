@@ -1,6 +1,10 @@
+import torch
+import numpy as np
+
+from typing import Union, List
+from PIL import Image
 from pydantic import BaseModel
 from typing import Optional, Union, List
-
 
 # Definition of the Img2ImgRequest model using Pydantic's BaseModel.
 # This model specifies the parameters accepted by the img2img function for generating images from images with text prompts.
@@ -18,7 +22,7 @@ class Img2ImgRequest(BaseModel):
         List[Image.Image],
         List[np.ndarray]
     ]
-    strength: Optional(float) = 0.3
+    strength: Optional[float] = 0.3
     num_inference_steps: Optional[int] = 50
     denoising_start: Optional[float] = 0.0
     denoising_end: Optional[float] = 0.0
