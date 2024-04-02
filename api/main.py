@@ -62,10 +62,14 @@ async def t2i(request_body: Txt2ImgRequest):
 
 # Define a route to handle the image-to-image conversion endpoint
 @app.post("/img2img", status_code=HTTP_201_CREATED)
-async def i2i(request_body: Img2ImgRequest, file: UploadFile = File(...)):
+async def i2i(file: UploadFile = File(...), request_body=Img2ImgRequest):
     # Perform text-to-image conversion using the provided request body
-    print("here", file)
-    result = img2img(request_body)
+    contents = await file.read()
+    
+    # Convert the file contents to a PIL Image object
+    image = Image.open(io.BytesIO(contents))
+    print("here", image)
+    result = img2img(request_body, image)
 
     result.save("output.png") # Save the resulting image to a file
 
