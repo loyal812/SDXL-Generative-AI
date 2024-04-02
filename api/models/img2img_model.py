@@ -14,14 +14,7 @@ class Img2ImgRequest(BaseModel):
     api_key: Optional[str] = ""
     prompt: Optional[str] = "Astronaut in a jungle, cold color palette, muted colors, detailed, 8k"
     prompt2: Optional[str] = ""
-    image: Union[
-        torch.Tensor,
-        Image.Image,
-        np.ndarray,
-        List[torch.Tensor],
-        List[Image.Image],
-        List[np.ndarray]
-    ]
+    # image: UploadFile = File(...)
     strength: Optional[float] = 0.3
     num_inference_steps: Optional[int] = 50
     denoising_start: Optional[float] = 0.0
