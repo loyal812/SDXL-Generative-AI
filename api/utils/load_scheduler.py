@@ -21,16 +21,8 @@ def load_scheduler(scheduler: str):
         case 'dpmpp_2m_k':
             # Recommend steps 20 ~ 30
             dpmpp_2m_k = DPMSolverMultistepScheduler(**main_config)
-            model.scheduler = dpmpp_2m_k
-            return "result2"
+            return dpmpp_2m_k
         case 'unipc':
             # Recommend steps 20 ~ 30
             unipc = UniPCMultistepScheduler(**main_config)
             return unipc
-        case 'ddim':
-            # Recommend steps 10 ~ 15
-            # guidance_rescale=0.7
-            ddim = DDIMScheduler.from_config(
-                **main_config, rescale_betas_zero_snr=True, timestep_spacing="trailing"
-            )
-            return ddim

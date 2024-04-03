@@ -64,15 +64,22 @@ def refinerImg(img: Union[
         List[torch.Tensor],
         List[Image.Image],
         List[np.ndarray]
-    ]
+    ], param: Txt2ImgRequest
 ):
     # Load the refiner model for image-to-image generation.
     model = load_sdxl_refiner_model()
 
     init_image = load_image(img).convert("RGB")
-    prompt = "high resolution, realistic, realistic, 8k"
 
     # Generate an image based on the image with input text prompts and other parameters using the loaded model.
-    image = model(prompt, image=init_image).images[0]
+    image = model(
+        # prompt, 
+        image=init_image,
+        prompt=param.prompt, 
+        negative_prompt=param.negative_prompt,
+        strength=0.75, 
+        guidance_scale=7.5,
+        num_inference_steps=50
+    ).images[0]
 
     return image                     # Return the generated image.
