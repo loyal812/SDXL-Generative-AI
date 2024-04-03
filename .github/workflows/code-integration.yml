@@ -19,17 +19,3 @@ jobs:
 
       - name: Run the tests
         run: make test
-
-  checks:
-    name: Check code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Delete huge unnecessary tools folder
-        run: rm -rf /opt/hostedtoolcache
-
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Checks
-        run: make test
-
