@@ -4,26 +4,18 @@ on:
   push:
     branches:
       - main
-      - dev
+      - fix/docker
 
 jobs:
   test:
     name: Run the test suite
     runs-on: ubuntu-latest
     steps:
+      - name: Delete huge unnecessary tools folder
+        run: rm -rf /opt/hostedtoolcache
+
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Run the tests
         run: make test
-
-  checks:
-    name: Check code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Checks
-        run: make test
-
